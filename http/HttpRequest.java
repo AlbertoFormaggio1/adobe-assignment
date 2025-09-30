@@ -7,14 +7,13 @@ public class HttpRequest {
     private final HttpMethod method;  // Http method
     private final String path; // Path of the required resource
     private final Map<String, String> headers; // Mapping Header -> HeaderContent
-    private final byte[] body;
+    //private final byte[] body;
     private final String version;
 
-    public HttpRequest(HttpMethod method, String path, String version, Map<String, String> headers, byte[] body){
+    public HttpRequest(HttpMethod method, String path, String version, Map<String, String> headers){
         this.method = method;
         this.path = path;
         this.headers = headers;
-        this.body = body;
         this.version = version;
     }
 
