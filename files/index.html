@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Adobe Symbol (ASCII)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --adobe-red: #ff0000;
+      --bg: #ffffff;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--adobe-red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+    .wrap {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+    pre {
+      line-height: 1;
+      font-size: clamp(10px, 2.4vw, 20px); /* scales with viewport */
+      margin: 0;
+      white-space: pre;
+      text-shadow: 0 0 0 currentColor; /* crisp rendering */
+    }
+    .caption {
+      margin-top: 1rem;
+      color: #444;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" aria-label="Adobe symbol made with ASCII characters">
+    <div>
+      <pre>
+               /\               
+              /  \              
+             / /\ \             
+            / /  \ \            
+           / /____\ \           
+          /  _____   \          
+         /  /     \   \         
+        /  /  /\   \   \        
+       /  /  /  \   \   \       
+      /__/__/    \___\___\      
+      </pre>
+    </div>
+    <div>Adobe</div>
+  </div>
+</body>
+</html>

@@ -3,11 +3,13 @@ package http;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.net.HttpVersionNotSupportedException;
 import java.util.HashMap;
+import java.util.Map;
+
+import http.exceptions.BadRequestException;
 
 public class HttpRequestParser {
-    private class RequestLine{
+    private static class RequestLine{
         private HttpMethod method;
         private String version;
         private String path;
@@ -31,7 +33,7 @@ public class HttpRequestParser {
         }
     }
 
-    public static HttpRequest parse(InputStreamReader inputReader) throws IOException{
+    public static HttpRequest parse(InputStreamReader inputReader) throws Exception{
         BufferedReader br = new BufferedReader(inputReader);
 
         // Read Request Line
@@ -40,11 +42,12 @@ public class HttpRequestParser {
         // Read headers
         Map<String, String> headers = readHeaders(br);
         
-        return new HttpRequest(requestLine.method, requestLine.path, requestLine.version, headers);
+        return new HttpRequest(requestLine.getMethod(), requestLine.getPath(), requestLine.getVersion(), headers);
     }
 
-    private static Map<String, String> readHeaders(BufferedReader br) throws IOException{
+    private static Map<String, String> readHeaders(BufferedReader br) throws Exception{
         Map<String, String> headers = new HashMap<>();
+        String line;
         while((line = br.readLine()) != null){
             // Empty line separates headers from content
             if(line.isEmpty())
@@ -64,7 +67,7 @@ public class HttpRequestParser {
         return headers;
     }
 
-    private static RequestLine readRequestLine(String requestLine){
+    private static RequestLine readRequestLine(String requestLine) throws Exception{
         // Check if requestLine is valid
         if(requestLine == null || requestLine.isEmpty())
             throw new BadRequestException("Empty request line");
@@ -81,13 +84,9 @@ public class HttpRequestParser {
         }
 
         String path = parts[1];
+        Utils.log(path);
         String version = parts[2];
 
-        // Check HTTP version
-        if(version != "HTTP/1.1"){
-            throw new HttpVersionNotSupportedException("Only HTTP/1.1 is supported");
-        }
-
-        return new RequestLine(method, parts[1], parts[2]);
+        return new RequestLine(method, path, version);
     }
 }

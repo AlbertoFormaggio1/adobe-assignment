@@ -28,9 +28,4 @@ public class HttpRequest {
     public String getHeaderValue(String headerKey){
         return headers.get(headerKey);
     }
-
-    public byte[] getBody(){
-        // Deep copy
-        return body.clone();
-    }
 }

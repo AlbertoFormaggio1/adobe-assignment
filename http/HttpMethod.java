@@ -5,6 +5,7 @@ import java.util.Map;
 
 public enum HttpMethod {
     GET,
+    HEAD,
     POST,
     PUT,
     DELETE,
@@ -14,7 +15,7 @@ public enum HttpMethod {
 
     static {
         Map<String, HttpMethod> map = new HashMap<>();
-        for(HttpMehtod method: HttpMethod.values()){
+        for(HttpMethod method: HttpMethod.values()){
             map.put(method.name(), method);
         }
         LOOKUP = map;
