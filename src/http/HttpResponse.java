@@ -3,12 +3,10 @@ package http;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import http.Status;
 
 public class HttpResponse {
     private final String version;
