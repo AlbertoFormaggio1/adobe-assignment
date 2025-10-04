@@ -57,7 +57,7 @@ public class StaticFileHandler implements Handler{
     @Override
     public HttpResponse handle(HttpRequest request, RequestContext context){
         try{
-            if(request.getVersion() != "HTTP/1.1") throw new VersionNotSupportedException(String.format("The only HTTP version accepted is HTTP/1.1. Got: %s.", request.getVersion()));
+            if(!request.getVersion().equals("HTTP/1.1")) throw new VersionNotSupportedException(String.format("The only HTTP version accepted is HTTP/1.1. Got: %s.", request.getVersion()));
 
             MethodHandler methodHandler = registry.get(request.getMethod());
             if (methodHandler == null) throw new MethodNotAllowedException(String.format("The method %s is not allowed", request.getMethod()));
