@@ -28,19 +28,19 @@ public class TestFileService {
     @Test
     public void computeHeaders_existingFile_returnsMeta() throws Exception{
         FileService srv = new FileService();
-        Path path = Paths.get("files");
+        Path path = Paths.get("files").toAbsolutePath().normalize();
         RequestContext context = new RequestContext(path);
 
         FileMeta res = srv.computeHeaders(req("index.html"), context);
 
-        assertEquals(res.getPath().toString(), "files/index.html");
+        assertEquals(res.getPath().toString(), Paths.get("files/index.html").toAbsolutePath().normalize().toString());
         assertEquals(res.getContentType(), "text/html");
     }
 
     @Test
     public void computeHeaders_directory_forbidden() throws Exception {
         FileService srv = new FileService();
-        Path path = Paths.get("files");
+        Path path = Paths.get("files").toAbsolutePath().normalize();
         RequestContext context = new RequestContext(path);
 
         assertThrows(ForbiddenException.class, () -> srv.computeHeaders(req("folder"), context));
@@ -49,7 +49,7 @@ public class TestFileService {
     @Test
     public void computeHeaders_missing_notFound() throws Exception {
         FileService srv = new FileService();
-        Path path = Paths.get("files");
+        Path path = Paths.get("files").toAbsolutePath().normalize();
         RequestContext context = new RequestContext(path);
 
         assertThrows(NotFoundException.class, () -> srv.computeHeaders(req("not_found.html"), context));
