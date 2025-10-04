@@ -19,14 +19,18 @@ A compact HTTP/1.1 server written in Java. It serves static files from a documen
 Compile **everything** into `./out`, then start the server:
 
 ```bash
-# Compile everything into ./out
-find . -name "*.java" -print0 | xargs -0 javac -encoding UTF-8 -d out
+# Compile everything into ./out except for the tests. Run this command from the main repo folder
+find . -path ./src/test -prune -o -name "*.java" -print0 | xargs -0 javac -encoding UTF-8 -d out
 
-# Run the server (replace package if Executable is in a package)
-java -cp out Executable 8080
+# Run the server. Provide the ABSOLUTE path to the folder.
+java -cp out Executable 17000 "$(pwd)/files"
 ```
 
 - Only HTTP/1.1 is supported; others return 505.
 - Responses are streamed; large files don’t load fully into memory.
 
-Also tests are provided using JUnit 5
+Also tests are provided using JUnit 5.
+
+## References
+- I used the last slides of this presentation: https://www.cse.chalmers.se/edu/year/2011/course/EDA343/Assignments/Assignment1/Assignment1_presentation.pdf to understand the general idea behind the WebServer.
+- Comments were written using ChatGPT5.
