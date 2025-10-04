@@ -2,6 +2,7 @@ package routing;
 
 import java.nio.file.Path;
 import http.exceptions.ForbiddenException;
+import util.Utils;
 
 /**
  * Utility class for safely resolving request paths
@@ -44,11 +45,12 @@ public final class PathResolver {
         }
 
         // Join docRoot + requestPath (normalized relative path)
-        Path resolvedPath = docRoot.resolve(requestPath).normalize();
+        Path root = docRoot.toAbsolutePath().normalize();
+        Path resolved = root.resolve(requestPath).normalize();
 
         // Ensure the resolved path is still inside the docRoot
         // (prevents "../../etc/passwd" style traversal)
-        if (!resolvedPath.startsWith(docRoot)) {
+        if (!resolved.startsWith(docRoot)) {
             throw new ForbiddenException(
                 String.format("The path provided %s is not allowed", requestPath)
             );
