@@ -3,8 +3,7 @@ package http;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-
-import http.HttpResponse;
+import java.util.Map;
 
 /**
  * Utility class responsible for serializing an {@link HttpResponse}
@@ -34,7 +33,7 @@ public final class HttpResponseWriter {
         outs.write(statusLine.getBytes(StandardCharsets.UTF_8));
 
         // Write each header line
-        for (var entry : response.headers().entrySet()) {
+        for (Map.Entry<String, String> entry : response.headers().entrySet()) {
             String headerLine = String.format("%s: %s\r\n", entry.getKey(), entry.getValue());
             outs.write(headerLine.getBytes(StandardCharsets.UTF_8));
         }

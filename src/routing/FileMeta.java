@@ -19,9 +19,21 @@ public final class FileMeta {
     // MIME type string, e.g. "text/html" or "application/octet-stream"
     final String contentType;
 
-    FileMeta(Path path, long contentLength, String contentType) {
+    public FileMeta(Path path, long contentLength, String contentType) {
         this.path = path;
         this.contentLength = contentLength;
         this.contentType = contentType;
+    }
+
+    public Path getPath(){
+        return path;
+    }
+
+    public long getContentLength(){
+        return contentLength;
+    }
+
+    public String getContentType(){
+        return contentType;
     }
 }

@@ -88,6 +88,8 @@ public class HttpRequestParser {
 
             // Split "Key: Value" at the first colon
             int idx = line.indexOf(":");
+            if(idx == -1)
+                throw new BadRequestException("Malformed header");
             String key = line.substring(0, idx).trim();
             String value = line.substring(idx + 1).trim();
             

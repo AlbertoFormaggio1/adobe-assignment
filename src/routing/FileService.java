@@ -17,7 +17,7 @@ import http.exceptions.ForbiddenException;
  *  - validate that the file exists and is not a directory
  *  - determine content length and content type
  */
-public final class FileService {
+public class FileService {
 
     /**
      * Compute headers and file metadata for the requested file.
@@ -64,7 +64,7 @@ public final class FileService {
 
         // Fallback by file extension
         String name = file.getFileName().toString().toLowerCase();
-        if (name.endsWith(".html") || name.endsWith(".htm")) return "text/html; charset=utf-8";
+        if (name.endsWith(".html") || name.endsWith(".htm")) return "text/html";
         if (name.endsWith(".css")) return "text/css; charset=utf-8";
         if (name.endsWith(".js")) return "application/javascript";
         if (name.endsWith(".png")) return "image/png";
