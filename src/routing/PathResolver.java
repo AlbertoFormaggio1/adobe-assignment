@@ -56,6 +56,6 @@ public final class PathResolver {
             );
         }
 
-        return resolvedPath;
+        return resolved;
     }
 }
