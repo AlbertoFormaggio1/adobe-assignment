@@ -29,7 +29,7 @@ public class Executable {
         }
 
         // Create the RequestContext for this WebServer with the specified path
-        RequestContext context = new RequestContext(Paths.get("./files"));
+        RequestContext context = new RequestContext(Paths.get("files"));
         StaticFileHandler fileHandler = new StaticFileHandler();
         // Create also the router
         Router router = new Router(fileHandler, context);
